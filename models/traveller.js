@@ -27,7 +27,25 @@ Traveller.prototype.calculateTotalDistanceTravelled = function () {
 };
 
 Traveller.prototype.getUniqueModesOfTransport = function () {
+  const result = [];
+  this.journeys.forEach(function(journey) {
+    // JS brings me -1 if something does not exist inside of the array. If it is in the array then skip it.
+    if (result.indexOf(journey.transport) === -1) {
+      result.push(journey.transport)
+    };
+  });
+  return result;
+};
 
+// Other option to getUniqueModesOfTransport 
+////////////////////////////////////////////
+Traveller.prototype.getUniqueModesOfTransport = function () {
+  return this.journeys.map((journey) => {
+    return journey.transport;
+  })
+  .filter((transport, index, array) => {
+    return array.indexOf(transport) === index;
+  });
 };
 
 
